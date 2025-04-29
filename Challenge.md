@@ -10,6 +10,12 @@ TypeError: got an unexpected keyword argument 'squared'
 ## Root Cause
 This happened because the version of `scikit-learn` I was using did not support the `squared=False` argument, which is required to compute RMSE (Root Mean Squared Error) directly. The `squared` parameter was introduced in `scikit-learn v0.22`.
 
+```python
+train_rmse = mean_squared_error(y_train, y_fit, squared=False)
+test_rmse = mean_squared_error(y_test, y_pred, squared=False)
+print((f'Train RMSE: {train_rmse:.2f}\n' f'Test RMSE: {test_rmse:.2f}'))
+```
+
 ## Solution
 To resolve this, I computed the RMSE manually using NumPy, which works across all versions of `scikit-learn`:
 
